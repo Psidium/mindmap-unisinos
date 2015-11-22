@@ -14,7 +14,7 @@ public class DNode<E> {
         return element; 
     }
 
-    public DNode<E> getDad() { 
+    public DNode<E> getSon() { 
         return son;
     }
 
