@@ -2,13 +2,12 @@ package br.unisinos.lab2.mindmap;
 
 /**
  *
- * @author Cássia, Gabriel Borges, Gabriel Castro
+ * @author Cï¿½ssia, Gabriel Borges, Gabriel Castro
  * @param <E>
  */
 public class MindMap<E> {
     private String descricao;
     private DNode<E> root;
-    
     
     //public String searchAll(){
     @Override
@@ -32,7 +31,7 @@ public class MindMap<E> {
         }
         return daddySons;
     }
-    
+
     public void insert(DNode<E> daddy, E element){
         DNode<E> newNode = new DNode<>(element);
         DNode<E> insertable = daddy;
@@ -163,6 +162,12 @@ public class MindMap<E> {
 	public void setRoot(DNode<E> root) {
 		this.root = root;
 	}
-    
+
+
+    public MindMap(E firstElement, String description) {
+        descricao = description;
+        root = new DNode<E>(firstElement);
+    }
+
     
 }
