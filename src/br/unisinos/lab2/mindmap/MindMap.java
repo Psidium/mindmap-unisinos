@@ -2,15 +2,38 @@ package br.unisinos.lab2.mindmap;
 
 /**
  *
- * @author Cassia, Gabriel Borges, Gabriel Castro
+ * @author Cássia, Gabriel Borges, Gabriel Castro
  * @param <E>
  */
 public class MindMap<E> {
     private String descricao;
     private DNode<E> root;
     
+    
+    //public String searchAll(){
+    @Override
+    public String toString(){
+        String ret = null;
+        DNode<E> searchDad = root;
+        while(searchDad != null){
+            ret += "+ " + searchDad.getElement() + ":\n     " + searchSons(searchDad,"") + "\n";
+            searchDad = searchDad.getBro();
+        }
+        return ret;
+    }
+    
+    public String searchSons(DNode<E> dad, String daddySons){
+        DNode<E> sons = dad.getSon();
+        while (sons != null){
+            daddySons += "\n-" + sons.getElement() + ";";
+            if(sons.getBro() != null)
+                searchSons(sons.getBro(),"+ " + sons.getElement() + ":\n     " + daddySons);
+            sons = sons.getBro();
+        }
+        return daddySons;
+    }
+    
     public void insert(DNode<E> daddy, E element){
-
         DNode<E> newNode = new DNode<>(element);
         DNode<E> insertable = daddy;
         DNode<E> sonOfInsertable = insertable.getSon();
