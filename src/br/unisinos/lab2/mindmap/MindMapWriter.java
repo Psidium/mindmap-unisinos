@@ -22,17 +22,17 @@ public class MindMapWriter<E> {
         DNode<E> nextBrother = node.getBro();
         
         if (nextSon != null) {
-        	sNode += sNode + makeInnerXML(nextSon, tabNumber) + "</node>\n";
+        	sNode += makeInnerXML(nextSon, tabNumber) + "</node>\n";
         	if (nextBrother != null) {
         		return sNode + "</node>\n" + makeInnerXML(nextBrother, tabNumber);
         	} else {
-        		return sNode + "</node>\n";
+        		return sNode + "</node>";
         	}
         } else {
         	if (nextBrother != null) {
         		return sNode + "</node>\n" + makeInnerXML(nextBrother, tabNumber); 
         	} else {
-        		return sNode + "</node>\n";
+        		return sNode;
         	}
         }
 	}
