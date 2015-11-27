@@ -23,5 +23,19 @@ public class MindMapInfo {
     public MindMapInfo(String descript) {
     	this.description = descript;
     }
+
+	@Override
+	public boolean equals(Object obj) {
+		if (!(obj instanceof MindMapInfo)) {
+			return false;
+		}
+		return description.equals(((MindMapInfo) obj).getDescription());
+	}
+
+	@Override
+	public String toString() {
+		return description;
+	}
+    
     
 }

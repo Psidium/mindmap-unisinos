@@ -25,7 +25,7 @@
           <manifest>
             <addClasspath>true</addClasspath>
             <classpathPrefix>lib/</classpathPrefix>
-            <mainClass>br.unisinos.lab2.mindmap.MindMapMain</mainClass>
+            <mainClass>br.unisinos.lab2.mindmap.MindMapTool</mainClass>
           </manifest>
         </archive>
       </configuration>
