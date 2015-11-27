@@ -66,7 +66,11 @@ public final class MindMapTool {
         		}
         		break;
         	case 5:
-        		
+        		MindMapReader<MindMapInfo> reader = new MindMapReader<>();
+                        try {
+                        reader.read();
+                    } catch (Exception e) {
+                    }
         		break;
         	}
         }
