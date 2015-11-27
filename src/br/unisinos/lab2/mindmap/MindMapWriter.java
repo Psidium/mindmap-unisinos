@@ -4,11 +4,12 @@ public class MindMapWriter<E> {
 	private StringBuffer xml;
 	private int currentStringIndex = 0;
 	
-	public void write(MindMap<E> mindMap) {
+	public String write(MindMap<E> mindMap) {
 		DNode<E> root = mindMap.getRoot();
 		String out = "<?xml version=\"1.0\"?>\n";
 		out += makeInnerXML(root, 0);
 		System.out.println(out);
+		return out;
 		//TODO: MAKE WRITE THE XML STRING TO FILE
 	}
 	

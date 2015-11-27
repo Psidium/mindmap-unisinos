@@ -36,12 +36,14 @@ public class MindMap<E> {
 
     private DNode<E> remove(E element, DNode<E> referencerNode, DNode<E> elementNode) {
     	if (elementNode.getElement().equals(element)) { //guard: if it, delete everything to it
-    		if(referencerNode.getBro().getElement().equals(elementNode.getElement())) {
+    		DNode<E> referencerBro = referencerNode.getBro();
+    		if((referencerBro != null) && referencerBro.getElement().equals(elementNode.getElement())) {
     			referencerNode.setBro(elementNode.getBro());
     			//if this node is the last of brothers, the referencer becomes the last,
     			//if not, the brother of this will be his now
     		}
-    		if(referencerNode.getSon().getElement().equals(elementNode.getElement())) {
+    		DNode<E> referencerSon = referencerNode.getSon();
+    		if((referencerSon != null) && referencerSon.getElement().equals(elementNode.getElement())) {
     			referencerNode.setSon(elementNode.getBro());
     		}
     		purgeBranchStartingFrom(elementNode.getSon());
