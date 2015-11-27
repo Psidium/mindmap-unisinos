@@ -6,40 +6,34 @@ public class MindMapWriter<E> {
 	
 	public void write(MindMap<E> mindMap) {
 		DNode<E> root = mindMap.getRoot();
-		xml = new StringBuffer("<?xml version=\"1.0\"?>\n");
-		currentStringIndex = xml.length();
-		makeInnerXML(root);
-		System.out.println(xml);
+		String out = "<?xml version=\"1.0\"?>\n";
+		out += makeInnerXML(root, 0);
+		System.out.println(out);
+		//TODO: MAKE WRITE THE XML STRING TO FILE
 	}
 	
-	private DNode<E> makeInnerXML(DNode <E> node) {
-		xml.insert(currentStringIndex, "<node>\n</node>\n");
-		currentStringIndex += 7;
+	private String makeInnerXML(DNode <E> node, int tabNumber) {
+		tabNumber += 1;
+		String sNode = "<node>\n";
 		E elem = node.getElement();
-		String toInsert = "<"+elem.getClass()+">\n"+elem.toString()+"\n</"+elem.getClass()+">\n";
-		xml.insert(currentStringIndex, toInsert);
-		currentStringIndex+= toInsert.length();
+		sNode += "<"+elem.getClass().getSimpleName() +">\n"+elem.toString()+"\n</"+elem.getClass().getSimpleName()+">\n";
 		
         DNode<E> nextSon = node.getSon();
         DNode<E> nextBrother = node.getBro();
-
-        if (nextSon != null) { //is there any son to look for? (I'm not a leaf)
-            DNode<E> nodeSon = makeInnerXML(nextSon);
-            if (nodeSon != null) { //did the element was in one of my sons?
-                return nodeSon;
-            } else { //no it wasn't, go to a brother
-                if (nextBrother != null) {
-                    return makeInnerXML(nextBrother); 
-                } else { //I don't have a brother and it wasn't in my sons
-                    return null;
-                }
-            }
-        } else { //I don't have a son, search for my brother
-            if (nextBrother != null) {
-                return makeInnerXML(nextBrother);
-            } else { //I don't have a brother neither a son and I'm not it, return null
-                return null;
-            }
+        
+        if (nextSon != null) {
+        	sNode += sNode + makeInnerXML(nextSon, tabNumber) + "</node>\n";
+        	if (nextBrother != null) {
+        		return sNode + "</node>\n" + makeInnerXML(nextBrother, tabNumber);
+        	} else {
+        		return sNode + "</node>\n";
+        	}
+        } else {
+        	if (nextBrother != null) {
+        		return sNode + "</node>\n" + makeInnerXML(nextBrother, tabNumber); 
+        	} else {
+        		return sNode + "</node>\n";
+        	}
         }
 	}
 }
