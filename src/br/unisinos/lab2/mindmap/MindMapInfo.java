@@ -7,7 +7,7 @@ package br.unisinos.lab2.mindmap;
 
 /**
  *
- * @author Cássia
+ * @author Cï¿½ssia
  */
 public class MindMapInfo {
     protected String description;
@@ -20,5 +20,8 @@ public class MindMapInfo {
         this.description = description;
     }
     
+    public MindMapInfo(String descript) {
+    	this.description = descript;
+    }
     
 }

@@ -10,17 +10,10 @@ import br.unisinos.lab2.mindmap.MindMap;
 
 @RunWith(JUnit4.class)
 public class MindMapTest {
-  @Test
-  public void testFindInRoot() {
-    MindMap<String> mind = new MindMap<>();
-    DNode<String> root = new DNode<String>("Root");
-    mind.setRoot(root);
-    assertEquals(root, mind.getElement("Root"));
-  }
+
   @Test
   public void testFindInOneLevel() {
-    MindMap<String> mind = new MindMap<>();
-    DNode<String> root  = new DNode<String>("Root");
+    MindMap<String> mind = new MindMap<String>("Root", "description");
     DNode<String> br1   = new DNode<String>("br1");
     DNode<String> br11  = new DNode<String>("br11");
     DNode<String> br2   = new DNode<String>("br2");
@@ -38,7 +31,7 @@ public class MindMapTest {
     DNode<String> br41  = new DNode<String>("br41");
     DNode<String> br42  = new DNode<String>("br42");
     
-    root.setSon(br1);
+    mind.getRoot().setSon(br1);
     br1.setBro(br2);
     br2.setBro(br3);
     br3.setBro(br4);
@@ -60,9 +53,7 @@ public class MindMapTest {
     br4.setSon(br41);
     br41.setBro(br42);
     
-    mind.setRoot(root);
-    
-    assertEquals(root , mind.getElement("Root"));
+
     assertEquals(br1  , mind.getElement("br1"));
     assertEquals(br11 , mind.getElement("br11"));
     assertEquals(br2  , mind.getElement("br2"));
@@ -81,5 +72,8 @@ public class MindMapTest {
     assertEquals(br42 , mind.getElement("br42"));
     
     assertEquals(null, mind.getElement("batta"));
+    
+    MindMapWriter<String> print = new MindMapWriter<>();
+    print.write(mind);
   }
 }
