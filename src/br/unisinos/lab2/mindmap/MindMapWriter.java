@@ -1,16 +1,24 @@
 package br.unisinos.lab2.mindmap;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class MindMapWriter<E> {
 	private StringBuffer xml;
 	private int currentStringIndex = 0;
 	
-	public String write(MindMap<E> mindMap) {
+	public void write(MindMap<E> mindMap) throws IOException {
 		DNode<E> root = mindMap.getRoot();
 		String out = "<?xml version=\"1.0\"?>\n";
 		out += makeInnerXML(root, 0);
 		System.out.println(out);
-		return out;
-		//TODO: MAKE WRITE THE XML STRING TO FILE
+
+                String path = "fileMindMapXml.xml";
+                BufferedWriter buffWrite = new BufferedWriter(new FileWriter(path));
+                buffWrite.append(out);
+                buffWrite.close();
+
 	}
 	
 	private String makeInnerXML(DNode <E> node, int tabNumber) {
